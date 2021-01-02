@@ -1,17 +1,21 @@
 const { Telegraf } = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN);
-const data = import(data.json);
+const data = require('./data.js');
+var emoji = require('node-emoji');
 
 bot.start(ctx => {
+  console.log(data.responses.experience);
+
   let user = ctx.message.from.first_name || ctx.message.from.id;
   ctx.reply(
-    `Hola ${user}! puedes preguntarme cualquier cosa relacionada con mi curriculum \uD83D\uDE00`
+    `Hola ${user}! puedes preguntarme cualquier cosa relacionada con mi curriculum ${emoji.get('smile')}`
   );
         
   });
 bot.hears(['hi', "Hi", "Hola", "hola"], (ctx) => ctx.reply('Hola! \uD83D\uDE00'))
-bot.hears(['que edad tienes?', "cuantos años tienes?"], (ctx) => ctx.reply('Tengo 28 años'))
-bot.hears([/\bmotivación\b/gmi], (ctx) => ctx.reply(data.motivation))
-bot.hears([/\bExperiencia\b | \btrabajo\b/gmi], (ctx) => ctx.reply(data.experience))
+bot.hears([/\btí\b/gmi, /\bti\b/gmi], (ctx) => ctx.reply(data.responses.me))
+bot.hears([/\bmotivación\b/gmi, /\bmotivacion\b/gmi], (ctx) => ctx.reply(data.responses.motivation))
+bot.hears([/\bExperiencia\b/gmi, /\btrabajo\b/gmi], (ctx) => ctx.reply(data.responses.experience))
+bot.hears([/\bestudios\b/gmi, /\bformación\b/gmi], (ctx) => ctx.reply(data.responses.education))
 bot.launch()
 
