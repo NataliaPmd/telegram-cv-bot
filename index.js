@@ -1,7 +1,13 @@
+const express = require('express');
 const { Telegraf } = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const data = require('./data.js');
 var emoji = require('node-emoji');
+
+const app = express();
+app.listen( process.env.PORT, () => {
+  console.log('Servidor corriendo en puerto ' + process.env.PORT );
+});
 
 bot.start(ctx => {
   console.log(data.responses.experience);
