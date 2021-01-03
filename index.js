@@ -3,6 +3,7 @@ const { Telegraf } = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const data = require('./data.js');
 var emoji = require('node-emoji');
+const { Markup } = require('telegraf');
 
 const app = express();
 app.listen( process.env.PORT, () => {
@@ -23,5 +24,7 @@ bot.hears([/\btí\b/gmi, /\bti\b/gmi], (ctx) => ctx.reply(data.responses.me))
 bot.hears([/\bmotivación\b/gmi, /\bmotivacion\b/gmi], (ctx) => ctx.reply(data.responses.motivation))
 bot.hears([/\bExperiencia\b/gmi, /\btrabajo\b/gmi], (ctx) => ctx.reply(data.responses.experience))
 bot.hears([/\bestudios\b/gmi, /\bformación\b/gmi], (ctx) => ctx.reply(data.responses.education))
-bot.launch()
+bot.hears([/\bcontacto\b/gmi, /\befzf\b/gmi], (ctx) => ctx.reply(data.responses.education))
+
+bot.startPolling();
 
